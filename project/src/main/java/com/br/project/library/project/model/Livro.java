@@ -9,25 +9,33 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="Livros")
-public record Livro (
+public class Livro {
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
      @Column(name="codigo")
-     int codigo,
+     private int codigo;
+
      @Column(name="titulo")
-     String titulo,
+     private String titulo;
+
      @Column(name="autor")
-     String autor,
+     private String autor;
+
      @Column(name="quantidadePaginas")
-     int quantidadePaginas,
+     private int quantidadePaginas;
+
      @Column(name="valor")
-     Double valor,
+     private Double valor;
+
      @Column(name="linguagem")
-     String linguagem,
+     private String linguagem;
+
      @Column(name="nomeTradutor")
-     String nomeTradutor,
+     private String nomeTradutor;
+
      @Column(name="editora")
-     String editora,
+     private String editora;
+
      @Column(name="dataLancamento")
-     String dataLancamento
-){}
+     private String dataLancamento;
+}
