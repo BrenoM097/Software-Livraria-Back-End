@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.br.project.library.project.service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.br.project.library.project.model.Livro;
-import com.br.project.library.project.repository.LivroRepositorio;
 
 
 @RestController
@@ -28,8 +28,13 @@ import com.br.project.library.project.repository.LivroRepositorio;
 public class LivroController {
 
     //Ações
+
+    private final LivroService acoes;
+
     @Autowired
-    private LivroRepositorio acoes;
+    public LivroController(LivroService livroService) {
+        this.acoes = livroService;
+    }
     
    // Consultar todos os Livros
     @GetMapping("/livros")

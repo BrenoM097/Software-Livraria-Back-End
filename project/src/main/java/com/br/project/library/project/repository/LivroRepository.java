@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.br.project.library.project.model.Livro;
 
 @Repository
-public interface LivroRepositorio extends JpaRepository<Livro, Integer> {
+public interface LivroRepository extends JpaRepository<Livro, Integer> {
     List<Livro> findAll();
 
     Livro findById(int Id);
