@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.br.project.library.project.service.LivroService;
+import com.br.project.library.project.dtos.BookDTO;
+import com.br.project.library.project.model.Book;
+import com.br.project.library.project.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -20,51 +22,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import com.br.project.library.project.model.Livro;
 
 
 @RestController
-@RequestMapping("/api")
-public class LivroController {
+@RequestMapping("/library")
+public class BookController {
 
-    //Ações
-
-    private final LivroService acoes;
+    private final BookService actions;
 
     @Autowired
-    public LivroController(LivroService livroService) {
-        this.acoes = livroService;
-    }
-    
-   // Consultar todos os Livros
-    @GetMapping("/livros")
-    public @ResponseBody List<Livro> listarTodos() {
-        return acoes.findAll();
+    public BookController(BookService bookService) {
+        this.actions = bookService;
     }
 
-    //Consultar por ID
-    @GetMapping("/livros/{id}")
-    public @ResponseBody Livro listarPorID(@PathVariable int id) {
-        return acoes.findById(id);
+    @GetMapping("/book")
+    public @ResponseBody List<Book> listAll() {
+        return actions.findAll();
     }
-  
-    //Cadastrar Livros
-    @PostMapping("/livros/cadastrar")
+
+    @GetMapping("/book/{id}")
+    public @ResponseBody Book listById(@PathVariable int id) {
+        return actions.findById(id);
+    }
+
+    @PostMapping("/book/register")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public @ResponseBody Livro cadastrar(@RequestBody Livro livro) {
-        return acoes.save(livro);
+    public @ResponseBody Book save(@RequestBody BookDTO book) {
+        return actions.save(book);
     }
 
-    //Alterar Livros
-    @PutMapping("/livros/alterar")
-    public @ResponseBody Livro alterar(@RequestBody Livro livro) {
-        return acoes.save(livro);
+    @PutMapping("/book/update")
+    public @ResponseBody Book update(@RequestBody BookDTO book) {
+        return actions.save(book);
     }
 
-    //Deletar Livro
-    @DeleteMapping("/livros/{id}")
-    public void deletar(@PathVariable int id) {
-        acoes.deleteById(id);
+    @DeleteMapping("/book/delete/{id}")
+    public void delete(@PathVariable int id) {
+        actions.deleteById(id);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
